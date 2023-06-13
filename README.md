@@ -2,11 +2,11 @@
 
 Unlock an Android phone (or device) by bruteforcing the lockscreen PIN.
 
-Turn your Kali Nethunter phone into a bruteforce PIN cracker for Android devices! 
+Turn your ~~Kali Nethunter phone~~ Raspberry Pi Zero-W into a bruteforce PIN cracker for Android devices! 
 
 ## 📱 How it works
 
-It uses a USB OTG cable to connect the locked phone to the Nethunter device. It emulates a keyboard, automatically tries PINs, and waits after trying too many wrong guesses.
+It uses a USB OTG cable to connect the locked phone to the pi. It emulates a keyboard, automatically tries PINs, and waits after trying too many wrong guesses.
 
 ![How to Connect Phones](https://user-images.githubusercontent.com/101783/91640968-b7d46280-ea64-11ea-8340-94e3bacb706e.png)
 
@@ -19,7 +19,7 @@ The USB HID Gadget driver provides emulation of USB Human Interface Devices (HID
 ### You will need
 
 - A locked Android phone
-- A Nethunter phone (or any rooted Android with HID kernel support)
+- A Raspberry Pi capable of libcomposite USB gadget support (Pi Zero/Zero W is the most common)
 - USB OTG (On The Go) cable/adapter (USB male Micro-B to female USB A), and a standard charging cable (USB male Micro-B to male A).
 - That's all!
 
@@ -42,9 +42,19 @@ The USB HID Gadget driver provides emulation of USB Human Interface Devices (HID
 - Configurable delays of N seconds after every X PIN attempts
 - Log file
 
-## Installation
+## Installation (Pi)
+Note - I assume you can do RPi stuff, these are just my notes in case my kid does this again.
 
-TBC
+1. Install Raspbian OS (recommend `rpi-imager`)
+  1. Ensure you set SSH, you're going to need that HID gadget
+1. Clone this repo on the pi
+1. Setup your Pi like this: https://randomnerdtutorials.com/raspberry-pi-zero-usb-keyboard-hid/
+  1. `make pi-install`
+  1. **NOTE:** `hid-keyboard` needs to be build with gcc-arm, so if you build it on your host (probably x64) and move it, it'll fail and then you'll be sad
+1. Reboot the pi
+1. Connect the pi to a non-target phone, run the `android-pin-bruteforce -c config-from-pi.default diag` to make sure everything work
+1. Follow the rest of the instructions
+
 
 ## Executing the script
 
@@ -418,6 +428,10 @@ My original motivation to develop this was to unlock a Samsung S5 Android phone.
 
 The optimised PIN list is from Justin Engler (@justinengler) & Paul Vines from Senior Security Engineer, iSEC Partners
 and was used in their Defcon talk, [Electromechanical PIN Cracking with Robotic Reconfigurable Button Basher (and C3BO).](https://www.defcon.org/html/defcon-21/dc-21-speakers.html#Engler).
+
+#### Pi Install Items:
+* hid-keyboard modded code from https://gitlab.com/kalilinux/nethunter/apps/kali-nethunter-app/-/raw/f1ab685d7174f7a140a0d38490ecd7d079784578/assets/nh_files/modules/hid-keyboard.c
+* Pi Gadget: https://randomnerdtutorials.com/raspberry-pi-zero-usb-keyboard-hid/
 
 ### Graphics
 
