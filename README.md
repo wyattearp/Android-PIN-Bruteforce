@@ -8,7 +8,7 @@ Turn your ~~Kali Nethunter phone~~ Raspberry Pi Zero-W into a bruteforce PIN cra
 
 It uses a USB OTG cable to connect the locked phone to the pi. It emulates a keyboard, automatically tries PINs, and waits after trying too many wrong guesses.
 
-![How to Connect Phones](https://user-images.githubusercontent.com/101783/91640968-b7d46280-ea64-11ea-8340-94e3bacb706e.png)
+![How to Connect Phones](images/ugly_hack.png)
 
 [Nethunter phone] <--> [USB cable] <--> [USB OTG adaptor] <--> [Locked Android phone]
 
